@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/fpt-tts/:path*",
+      "destination": "https://api.fpt.ai/hws/v2/:path*"
+    },
+    {
+      "source": "/api/zalo-tts/:path*",
+      "destination": "https://api.zalo.ai/v1/tts/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
