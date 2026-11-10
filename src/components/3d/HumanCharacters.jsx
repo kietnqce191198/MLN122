@@ -1,20 +1,22 @@
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import * as THREE from 'three'
 
 /**
  * 1. NHÂN VẬT CHÚ TƯ (Nông dân Vĩnh Long)
  * Đội nón lá, quàng khăn rằn, áo bà ba nâu, có animation bước đi chân thực khi di chuyển!
  */
-export function ChuTuModel({ isMoving = false, walkPhase = 0 }) {
+export function ChuTuModel({ isMovingRef, walkPhaseRef, isMoving = false, walkPhase = 0 }) {
   const leftLegRef = useRef()
   const rightLegRef = useRef()
   const leftArmRef = useRef()
   const rightArmRef = useRef()
 
   useFrame(() => {
-    if (isMoving) {
-      const swing = Math.sin(walkPhase * 10) * 0.45
+    const moving = isMovingRef ? isMovingRef.current : isMoving
+    const phase = walkPhaseRef ? walkPhaseRef.current : walkPhase
+
+    if (moving) {
+      const swing = Math.sin(phase * 10) * 0.45
       if (leftLegRef.current) leftLegRef.current.rotation.x = swing
       if (rightLegRef.current) rightLegRef.current.rotation.x = -swing
       if (leftArmRef.current) leftArmRef.current.rotation.x = -swing * 0.7

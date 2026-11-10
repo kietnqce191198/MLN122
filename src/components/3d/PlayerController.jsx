@@ -109,7 +109,7 @@ export function PlayerController({ initialPosition = [-2, 0, 3], boundaries = [-
         <meshBasicMaterial color="#EAB308" opacity={0.6} transparent />
       </mesh>
 
-      <ChuTuModel isMoving={isMovingRef.current} walkPhase={walkPhaseRef.current} />
+      <ChuTuModel isMovingRef={isMovingRef} walkPhaseRef={walkPhaseRef} />
     </group>
   )
 }

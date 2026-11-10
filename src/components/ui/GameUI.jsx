@@ -75,15 +75,15 @@ export function GameUI() {
   }
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-4 sm:p-6 overflow-hidden select-none">
+    <div className="absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-3 sm:p-6 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-[max(env(safe-area-inset-top),0.75rem)] overflow-hidden select-none">
       {/* 1. HEADER BAR: GỌN GÀNG Ở TRÊN CÙNG */}
-      <header className="flex justify-between items-start gap-3">
-        <div className="bg-slate-950/80 backdrop-blur-md border border-white/15 px-4 py-2 rounded-2xl text-white pointer-events-auto shadow-2xl">
-          <div className="text-[10px] uppercase tracking-widest text-slate-400 font-extrabold flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-            <span>Hợp Tác Xã Kiểu Mới - Vĩnh Long</span>
+      <header className="flex justify-between items-start gap-2 sm:gap-3">
+        <div className="bg-slate-950/85 backdrop-blur-md border border-white/15 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl text-white pointer-events-auto shadow-2xl max-w-[62%] sm:max-w-none">
+          <div className="text-[9px] sm:text-[10px] uppercase tracking-widest text-slate-400 font-extrabold flex items-center gap-1.5 truncate">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0" />
+            <span className="truncate">HTX Kiểu Mới - Vĩnh Long</span>
           </div>
-          <div className="text-xs sm:text-sm font-black text-amber-300 mt-0.5">
+          <div className="text-[11px] sm:text-sm font-black text-amber-300 mt-0.5 truncate sm:whitespace-normal">
             {currentScene === 'FARM' && 'Di chuyển Chú Tư lại gặp Trưởng Bản'}
             {currentScene === 'OFFICE' && 'Văn phòng HTX - Giữ vững cam kết chuỗi cung ứng'}
             {currentScene === 'GOV_STORM' && 'Di chuyển Chú Tư lại gặp Cán Bộ Nhà Nước'}
@@ -91,36 +91,36 @@ export function GameUI() {
         </div>
 
         {/* Cụm công cụ bên phải */}
-        <div className="flex items-center gap-2 pointer-events-auto">
+        <div className="flex items-center gap-1.5 sm:gap-2 pointer-events-auto shrink-0">
           <button
             onClick={handleReplayVoice}
-            className="px-3 py-2 rounded-xl border border-amber-500/40 bg-slate-900/80 hover:bg-slate-800 text-amber-300 text-xs font-bold flex items-center gap-1.5 transition-all shadow-lg backdrop-blur-md"
+            className="p-2 sm:px-3 sm:py-2 rounded-xl border border-amber-500/40 bg-slate-900/85 hover:bg-slate-800 text-amber-300 text-xs font-bold flex items-center gap-1.5 transition-all shadow-lg backdrop-blur-md active:scale-90 touch-manipulation"
             title="Phát lại đoạn audio này"
           >
             <PlayCircle size={15} />
-            <span>Phát lại</span>
+            <span className="hidden sm:inline">Phát lại</span>
           </button>
 
           <button
             onClick={toggleBGM}
-            className={`px-3 py-2 rounded-xl border flex items-center gap-1.5 text-xs font-bold transition-all shadow-lg backdrop-blur-md ${
+            className={`p-2 sm:px-3 sm:py-2 rounded-xl border flex items-center gap-1.5 text-xs font-bold transition-all shadow-lg backdrop-blur-md active:scale-90 touch-manipulation ${
               isBGMMuted
                 ? 'bg-rose-950/70 border-rose-500/50 text-rose-300'
-                : 'bg-slate-900/80 border-emerald-500/50 text-emerald-300 hover:bg-slate-800'
+                : 'bg-slate-900/85 border-emerald-500/50 text-emerald-300 hover:bg-slate-800'
             }`}
             title={isBGMMuted ? 'Bật nhạc nền' : 'Tắt nhạc nền'}
           >
             {isBGMMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
-            <span>{isBGMMuted ? 'Nhạc: Tắt' : 'Nhạc: Bật'}</span>
+            <span className="hidden sm:inline">{isBGMMuted ? 'Nhạc: Tắt' : 'Nhạc: Bật'}</span>
           </button>
 
           <button
             onClick={restartGame}
-            className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/10 px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-lg backdrop-blur-md"
+            className="p-2 sm:px-3 sm:py-2 bg-slate-900/85 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/10 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-lg backdrop-blur-md active:scale-90 touch-manipulation"
             title="Khởi động lại từ đầu"
           >
             <RotateCcw size={15} />
-            <span>Reset</span>
+            <span className="hidden sm:inline">Reset</span>
           </button>
         </div>
       </header>
@@ -133,7 +133,7 @@ export function GameUI() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="max-w-xl w-full flex flex-col gap-2 pointer-events-auto px-4"
+              className="max-w-xl w-full flex flex-col gap-2 pointer-events-auto px-2 sm:px-4"
             >
               {options.map((opt) => (
                 <motion.button
@@ -141,7 +141,7 @@ export function GameUI() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={opt.action}
-                  className={`w-full py-3 px-5 rounded-2xl font-bold text-xs sm:text-sm shadow-2xl transition-all border flex items-center justify-between text-left cursor-pointer backdrop-blur-md ${
+                  className={`w-full py-2.5 sm:py-3 px-3.5 sm:px-5 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm shadow-2xl transition-all border flex items-center justify-between text-left cursor-pointer backdrop-blur-md active:scale-[0.98] ${
                     opt.variant === 'danger'
                       ? 'bg-rose-950/90 hover:bg-rose-900 text-rose-100 border-rose-500/70 shadow-rose-950/60'
                       : opt.variant === 'success'
@@ -149,8 +149,8 @@ export function GameUI() {
                       : 'bg-slate-900/90 hover:bg-slate-800 text-amber-100 border-amber-500/50 shadow-slate-950/80'
                   }`}
                 >
-                  <span>{opt.text}</span>
-                  <span className="text-[10px] font-black px-2.5 py-1 rounded-lg bg-black/50 text-white shrink-0">
+                  <span className="pr-2">{opt.text}</span>
+                  <span className="text-[10px] font-black px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg bg-black/50 text-white shrink-0">
                     Chọn &rarr;
                   </span>
                 </motion.button>
@@ -161,57 +161,57 @@ export function GameUI() {
       </div>
 
       {/* 3. KHUNG CHAT VISUAL NOVEL & VIRTUAL D-PAD Ở ĐÁY MÀN HÌNH */}
-      <div className="w-full flex items-end justify-between gap-4 pointer-events-auto">
-        {/* D-PAD ĐIỀU KHIỂN CHÚ TƯ NHỎ GỌN Ở GÓC TRÁI */}
+      <div className="w-full flex flex-col-reverse sm:flex-row items-start sm:items-end justify-between gap-2.5 sm:gap-4 pointer-events-auto">
+        {/* D-PAD ĐIỀU KHIỂN CHÚ TƯ: TỐI ƯU NÚT BẤM TO RÕ, CHỐNG ZOOM CHO ĐIỆN THOẠI */}
         {!isGameOver && !isVictory && (
-          <div className="bg-slate-950/80 backdrop-blur-md border border-white/15 p-1.5 rounded-2xl flex flex-col items-center gap-1 shadow-2xl shrink-0">
+          <div className="bg-slate-950/85 backdrop-blur-md border border-white/20 p-2 sm:p-1.5 rounded-2xl flex flex-col items-center gap-1 shadow-2xl shrink-0 touch-none select-none">
             <button
               onMouseDown={() => setVirtualMovement('up', true)}
               onMouseUp={() => setVirtualMovement('up', false)}
-              onTouchStart={() => setVirtualMovement('up', true)}
-              onTouchEnd={() => setVirtualMovement('up', false)}
-              className="p-2 bg-slate-800 hover:bg-amber-500 hover:text-black rounded-xl text-white transition-all active:scale-90"
+              onTouchStart={(e) => { e.preventDefault(); setVirtualMovement('up', true) }}
+              onTouchEnd={(e) => { e.preventDefault(); setVirtualMovement('up', false) }}
+              className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center bg-slate-800 hover:bg-amber-500 hover:text-black rounded-xl text-white transition-all active:scale-90 active:bg-amber-500 active:text-black touch-none select-none shadow-md"
               title="Đi tới"
             >
-              <ArrowUp size={15} />
+              <ArrowUp size={16} />
             </button>
             <div className="flex gap-1">
               <button
                 onMouseDown={() => setVirtualMovement('left', true)}
                 onMouseUp={() => setVirtualMovement('left', false)}
-                onTouchStart={() => setVirtualMovement('left', true)}
-                onTouchEnd={() => setVirtualMovement('left', false)}
-                className="p-2 bg-slate-800 hover:bg-amber-500 hover:text-black rounded-xl text-white transition-all active:scale-90"
+                onTouchStart={(e) => { e.preventDefault(); setVirtualMovement('left', true) }}
+                onTouchEnd={(e) => { e.preventDefault(); setVirtualMovement('left', false) }}
+                className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center bg-slate-800 hover:bg-amber-500 hover:text-black rounded-xl text-white transition-all active:scale-90 active:bg-amber-500 active:text-black touch-none select-none shadow-md"
                 title="Rẽ trái"
               >
-                <ArrowLeft size={15} />
+                <ArrowLeft size={16} />
               </button>
               <button
                 onMouseDown={() => setVirtualMovement('down', true)}
                 onMouseUp={() => setVirtualMovement('down', false)}
-                onTouchStart={() => setVirtualMovement('down', true)}
-                onTouchEnd={() => setVirtualMovement('down', false)}
-                className="p-2 bg-slate-800 hover:bg-amber-500 hover:text-black rounded-xl text-white transition-all active:scale-90"
+                onTouchStart={(e) => { e.preventDefault(); setVirtualMovement('down', true) }}
+                onTouchEnd={(e) => { e.preventDefault(); setVirtualMovement('down', false) }}
+                className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center bg-slate-800 hover:bg-amber-500 hover:text-black rounded-xl text-white transition-all active:scale-90 active:bg-amber-500 active:text-black touch-none select-none shadow-md"
                 title="Đi lùi"
               >
-                <ArrowDown size={15} />
+                <ArrowDown size={16} />
               </button>
               <button
                 onMouseDown={() => setVirtualMovement('right', true)}
                 onMouseUp={() => setVirtualMovement('right', false)}
-                onTouchStart={() => setVirtualMovement('right', true)}
-                onTouchEnd={() => setVirtualMovement('right', false)}
-                className="p-2 bg-slate-800 hover:bg-amber-500 hover:text-black rounded-xl text-white transition-all active:scale-90"
+                onTouchStart={(e) => { e.preventDefault(); setVirtualMovement('right', true) }}
+                onTouchEnd={(e) => { e.preventDefault(); setVirtualMovement('right', false) }}
+                className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center bg-slate-800 hover:bg-amber-500 hover:text-black rounded-xl text-white transition-all active:scale-90 active:bg-amber-500 active:text-black touch-none select-none shadow-md"
                 title="Rẽ phải"
               >
-                <ArrowRight size={15} />
+                <ArrowRight size={16} />
               </button>
             </div>
-            <span className="text-[8px] text-slate-400 font-bold uppercase">Di chuyển</span>
+            <span className="text-[8px] text-slate-400 font-bold uppercase tracking-tight">Di chuyển</span>
           </div>
         )}
 
-        {/* KHUNG THOẠI VISUAL NOVEL Ở ĐÁY */}
+        {/* KHUNG THOẠI VISUAL NOVEL Ở ĐÁY: RỘNG RÃI TRÊN ĐIỆN THOẠI */}
         <AnimatePresence>
           {dialogue.text && !isGameOver && !isVictory && (
             <motion.div
@@ -219,14 +219,16 @@ export function GameUI() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 15 }}
-              className="flex-1 max-w-4xl"
+              className="w-full sm:flex-1 max-w-4xl"
             >
-              <div className="bg-slate-950/90 backdrop-blur-md border border-white/20 rounded-3xl p-4 sm:p-5 shadow-2xl flex items-center gap-4 relative">
-                <CharacterAvatar speaker={dialogue.speaker} />
+              <div className="bg-slate-950/90 backdrop-blur-md border border-white/20 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-2xl flex items-center gap-3 sm:gap-4 relative">
+                <div className="shrink-0 scale-90 sm:scale-100 origin-center">
+                  <CharacterAvatar speaker={dialogue.speaker} />
+                </div>
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-black text-amber-300 uppercase tracking-wider bg-white/10 px-3 py-0.5 rounded-full border border-white/10">
+                    <span className="text-[10px] sm:text-xs font-black text-amber-300 uppercase tracking-wider bg-white/10 px-2.5 py-0.5 rounded-full border border-white/10">
                       {dialogue.speaker || 'Thông tin'}
                     </span>
                   </div>
@@ -248,7 +250,7 @@ export function GameUI() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[999999] flex flex-col justify-between p-4 sm:p-6 pointer-events-auto overflow-hidden select-none"
+            className="fixed inset-0 z-[999999] flex flex-col justify-between p-3 sm:p-6 pointer-events-auto overflow-y-auto select-none safe-area-bottom safe-area-top gap-3"
           >
             {/* HÌNH NỀN 1920x1080 KẾ TOÁN HTX CHỈ TAY MẮNG CHÚ TƯ */}
             <motion.div
@@ -265,27 +267,27 @@ export function GameUI() {
             <div className="absolute inset-0 border-4 border-rose-600/50 pointer-events-none" />
 
             {/* TOP HEADER: CẢNH BÁO VI PHẠM & BÁO CÁO THIỆT HẠI GỌN GÀNG Ở TRÊN */}
-            <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-4">
+            <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-2.5 sm:gap-4">
               {/* Tiêu đề Game Over */}
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="bg-black/75 backdrop-blur-md border border-rose-500/50 rounded-2xl p-3.5 sm:p-4 shadow-2xl max-w-md"
+                className="bg-black/80 backdrop-blur-md border border-rose-500/50 rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl max-w-full sm:max-w-md w-full"
               >
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="px-2.5 py-0.5 rounded-full bg-rose-600 text-white font-black text-[10px] sm:text-xs uppercase tracking-widest flex items-center gap-1.5 animate-pulse shadow-md">
-                    <AlertTriangle size={13} />
+                  <span className="px-2 py-0.5 rounded-full bg-rose-600 text-white font-black text-[9px] sm:text-xs uppercase tracking-widest flex items-center gap-1.5 animate-pulse shadow-md">
+                    <AlertTriangle size={12} />
                     Cảnh Báo Vi Phạm Cam Kết
                   </span>
-                  <span className="text-rose-400 font-mono text-xs font-bold">
+                  <span className="text-rose-400 font-mono text-[11px] sm:text-xs font-bold">
                     MÂU THUẪN LỢI ÍCH
                   </span>
                 </div>
-                <h1 className="text-xl sm:text-3xl font-black text-rose-500 tracking-wider uppercase">
+                <h1 className="text-lg sm:text-3xl font-black text-rose-500 tracking-wider uppercase">
                   GAME OVER
                 </h1>
-                <p className="text-xs text-rose-200/90 font-medium mt-0.5">
+                <p className="text-[11px] sm:text-xs text-rose-200/90 font-medium mt-0.5">
                   Chạy theo lợi ích ngắn hạn trước mắt phá vỡ chuỗi liên kết giá trị HTX.
                 </p>
               </motion.div>
@@ -295,34 +297,34 @@ export function GameUI() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
-                className="bg-slate-950/85 backdrop-blur-md border-2 border-rose-500/60 rounded-2xl p-3 sm:p-4 shadow-2xl max-w-sm w-full"
+                className="bg-slate-950/90 backdrop-blur-md border-2 border-rose-500/60 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-2xl max-w-full sm:max-w-sm w-full"
               >
-                <div className="flex items-center justify-between text-xs font-black uppercase text-rose-300 tracking-wider border-b border-rose-500/30 pb-1.5 mb-2">
+                <div className="flex items-center justify-between text-[11px] sm:text-xs font-black uppercase text-rose-300 tracking-wider border-b border-rose-500/30 pb-1 mb-1.5 sm:mb-2">
                   <span className="flex items-center gap-1.5">
-                    <TrendingDown size={15} className="text-rose-400" />
-                    Thiệt Hại Kinh Tế Của Chú Tư
+                    <TrendingDown size={14} className="text-rose-400" />
+                    Thiệt Hại Của Chú Tư
                   </span>
-                  <span className="bg-rose-600 text-white text-[10px] px-2 py-0.5 rounded font-black">
+                  <span className="bg-rose-600 text-white text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded font-black">
                     LỖ NẶNG
                   </span>
                 </div>
 
-                <div className="space-y-1 text-[11px] sm:text-xs text-slate-200">
+                <div className="space-y-0.5 sm:space-y-1 text-[10px] sm:text-xs text-slate-200">
                   <div className="flex justify-between items-center py-0.5">
                     <span className="text-slate-400">Tiền chênh lệch ngắn hạn:</span>
                     <span className="text-emerald-400 font-mono font-bold">+5.000.000 VNĐ</span>
                   </div>
                   <div className="flex justify-between items-center py-0.5">
-                    <span className="text-slate-400">Phạt bồi thường vi phạm hợp đồng:</span>
+                    <span className="text-slate-400">Phạt bồi thường vi phạm:</span>
                     <span className="text-rose-400 font-mono font-bold">-20.000.000 VNĐ</span>
                   </div>
                   <div className="flex justify-between items-center py-0.5">
-                    <span className="text-slate-400">Mất bao tiêu khi thương lái ép giá:</span>
+                    <span className="text-slate-400">Mất bao tiêu khi bị ép giá:</span>
                     <span className="text-rose-400 font-mono font-bold">-35.000.000 VNĐ</span>
                   </div>
-                  <div className="flex justify-between items-center pt-2 border-t border-rose-500/30 font-black">
-                    <span className="text-white text-xs">Lợi nhuận thực tế Chú Tư:</span>
-                    <span className="text-rose-400 font-mono text-base font-extrabold">
+                  <div className="flex justify-between items-center pt-1.5 sm:pt-2 border-t border-rose-500/30 font-black">
+                    <span className="text-white text-[11px] sm:text-xs">Lợi nhuận thực tế:</span>
+                    <span className="text-rose-400 font-mono text-sm sm:text-base font-extrabold">
                       -50.000.000 VNĐ
                     </span>
                   </div>
@@ -337,23 +339,23 @@ export function GameUI() {
               transition={{ duration: 0.4, delay: 0.15 }}
               className="relative z-10 max-w-4xl w-full mx-auto"
             >
-              <div className="bg-slate-950/90 backdrop-blur-xl border-2 border-rose-500/60 rounded-3xl p-4 sm:p-5 shadow-2xl shadow-black relative overflow-hidden">
+              <div className="bg-slate-950/90 backdrop-blur-xl border-2 border-rose-500/60 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-2xl shadow-black relative overflow-hidden">
                 {/* Vạch phát sáng đỏ */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-rose-500 to-transparent" />
 
                 {/* Header người nói */}
-                <div className="flex justify-between items-center mb-2">
-                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-rose-600 to-red-600 text-white font-black text-xs sm:text-sm px-4 py-1 rounded-full uppercase tracking-wider shadow-md">
-                    <AlertTriangle size={14} />
+                <div className="flex justify-between items-center mb-1.5 sm:mb-2">
+                  <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-rose-600 to-red-600 text-white font-black text-[11px] sm:text-sm px-3 sm:px-4 py-0.5 sm:py-1 rounded-full uppercase tracking-wider shadow-md">
+                    <AlertTriangle size={13} />
                     <span>Kế toán HTX Nông nghiệp</span>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <button
                       onClick={handleReplayVoice}
-                      className="px-2.5 py-1 rounded-lg border border-rose-500/40 bg-black/50 hover:bg-black/80 text-rose-300 text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer"
+                      className="px-2 sm:px-2.5 py-1 rounded-lg border border-rose-500/40 bg-black/50 hover:bg-black/80 text-rose-300 text-[10px] sm:text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer"
                     >
-                      <PlayCircle size={13} />
+                      <PlayCircle size={12} />
                       <span>Phát lại</span>
                     </button>
                   </div>
@@ -365,15 +367,15 @@ export function GameUI() {
                 </p>
 
                 {/* NÚT UNDO / CHỌN LẠI TO RÕ */}
-                <div className="mt-4 pt-3 border-t border-rose-500/30 flex justify-end">
+                <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-rose-500/30 flex justify-end">
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={resetToOffice}
-                    className="py-3 px-6 sm:px-8 bg-gradient-to-r from-rose-600 via-red-600 to-amber-600 hover:from-rose-500 hover:to-amber-500 text-white font-black text-xs sm:text-sm uppercase tracking-wider rounded-2xl shadow-xl shadow-rose-950 flex items-center gap-2.5 cursor-pointer transition-all animate-pulse"
+                    className="w-full sm:w-auto py-2.5 sm:py-3 px-4 sm:px-8 bg-gradient-to-r from-rose-600 via-red-600 to-amber-600 hover:from-rose-500 hover:to-amber-500 text-white font-black text-xs sm:text-sm uppercase tracking-wider rounded-xl sm:rounded-2xl shadow-xl shadow-rose-950 flex items-center justify-center gap-2 cursor-pointer transition-all animate-pulse"
                   >
-                    <RotateCcw size={18} />
-                    <span>Chọn lại: Tuân thủ hợp đồng & Giữ chữ tín</span>
+                    <RotateCcw size={16} />
+                    <span>Chọn lại: Tuân thủ hợp đồng HTX</span>
                   </motion.button>
                 </div>
               </div>
@@ -389,7 +391,7 @@ export function GameUI() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[999999] flex flex-col justify-between p-4 sm:p-6 pointer-events-auto overflow-hidden select-none"
+            className="fixed inset-0 z-[999999] flex flex-col justify-between p-3 sm:p-6 pointer-events-auto overflow-y-auto select-none safe-area-bottom safe-area-top gap-3"
           >
             {/* HÌNH NỀN 1920x1080 TỔNG KẾT TOÀN DIỆN VĨNH LONG */}
             <motion.div
@@ -406,26 +408,26 @@ export function GameUI() {
             <div className="absolute inset-0 border-4 border-amber-400/40 pointer-events-none" />
 
             {/* TOP HEADER: TIÊU ĐỀ TỔNG KẾT & HUY HIỆU */}
-            <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start gap-4">
+            <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start gap-2.5 sm:gap-4">
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-black/75 backdrop-blur-md border border-amber-400/60 rounded-2xl p-3 sm:p-4 shadow-2xl max-w-xl"
+                className="bg-black/80 backdrop-blur-md border border-amber-400/60 rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl max-w-full sm:max-w-xl w-full"
               >
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black text-[10px] sm:text-xs uppercase tracking-widest flex items-center gap-1.5 shadow-md">
-                    <Award size={14} className="fill-slate-950" />
+                  <span className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black text-[9px] sm:text-xs uppercase tracking-widest flex items-center gap-1.5 shadow-md">
+                    <Award size={13} className="fill-slate-950" />
                     KẾT QUẢ NGHIÊN CỨU HTX KIỂU MỚI
                   </span>
-                  <span className="text-emerald-400 font-mono text-xs font-bold flex items-center gap-1">
+                  <span className="text-emerald-400 font-mono text-[11px] sm:text-xs font-bold flex items-center gap-1">
                     <Sparkles size={12} /> VĨNH LONG
                   </span>
                 </div>
-                <h1 className="text-xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-300 to-amber-500 uppercase tracking-wider">
+                <h1 className="text-lg sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-300 to-amber-500 uppercase tracking-wider">
                   VICTORY: BÀI TOÁN HÀI HÒA LỢI ÍCH KINH TẾ
                 </h1>
-                <p className="text-xs text-amber-200/90 font-medium mt-0.5">
+                <p className="text-[11px] sm:text-xs text-amber-200/90 font-medium mt-0.5">
                   Thống nhất quan hệ lợi ích – Động lực phát triển bền vững của kinh tế tập thể.
                 </p>
               </motion.div>
@@ -435,34 +437,34 @@ export function GameUI() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.15 }}
-                className="bg-slate-950/85 backdrop-blur-md border-2 border-emerald-400/80 rounded-2xl p-3.5 sm:p-4 shadow-2xl max-w-sm w-full"
+                className="bg-slate-950/90 backdrop-blur-md border-2 border-emerald-400/80 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-2xl max-w-full sm:max-w-sm w-full"
               >
-                <div className="flex items-center justify-between text-xs font-black uppercase text-emerald-300 tracking-wider border-b border-emerald-500/30 pb-1.5 mb-2">
+                <div className="flex items-center justify-between text-[11px] sm:text-xs font-black uppercase text-emerald-300 tracking-wider border-b border-emerald-500/30 pb-1 mb-1.5 sm:mb-2">
                   <span className="flex items-center gap-1.5">
-                    <TrendingUp size={16} />
-                    Báo Cáo Tài Chính Chú Tư
+                    <TrendingUp size={15} />
+                    Tài Chính Chú Tư
                   </span>
-                  <span className="bg-emerald-500 text-slate-950 px-2 py-0.5 rounded text-[10px] font-black">
+                  <span className="bg-emerald-500 text-slate-950 px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-black">
                     TĂNG x1.5 LẦN
                   </span>
                 </div>
 
-                <div className="space-y-1 text-[11px] sm:text-xs text-slate-200">
+                <div className="space-y-0.5 sm:space-y-1 text-[10px] sm:text-xs text-slate-200">
                   <div className="flex justify-between items-center py-0.5">
                     <span className="text-slate-400">Làm ăn cá thể nhỏ lẻ:</span>
                     <span className="text-slate-300 font-mono font-bold">80.000.000 VNĐ</span>
                   </div>
                   <div className="flex justify-between items-center py-0.5">
-                    <span className="text-slate-400">Tham gia chuỗi liên kết HTX:</span>
+                    <span className="text-slate-400">Tham gia chuỗi HTX:</span>
                     <span className="text-emerald-400 font-mono font-bold">120.000.000 VNĐ</span>
                   </div>
                   <div className="flex justify-between items-center py-0.5">
                     <span className="text-slate-400">Cổ tức phân phối thêm:</span>
                     <span className="text-emerald-400 font-mono font-bold">+15.000.000 VNĐ</span>
                   </div>
-                  <div className="flex justify-between items-center pt-2 border-t border-emerald-500/30 font-black">
-                    <span className="text-white text-xs">Tổng thu nhập thực tế:</span>
-                    <span className="text-emerald-400 font-mono text-base font-extrabold">
+                  <div className="flex justify-between items-center pt-1.5 sm:pt-2 border-t border-emerald-500/30 font-black">
+                    <span className="text-white text-[11px] sm:text-xs">Tổng thu nhập thực tế:</span>
+                    <span className="text-emerald-400 font-mono text-sm sm:text-base font-extrabold">
                       +135.000.000 VNĐ
                     </span>
                   </div>
@@ -528,24 +530,24 @@ export function GameUI() {
               transition={{ duration: 0.5, delay: 0.25 }}
               className="relative z-10 max-w-5xl w-full mx-auto"
             >
-              <div className="bg-slate-950/90 backdrop-blur-xl border-2 border-amber-400/60 rounded-3xl p-4 sm:p-5 shadow-2xl shadow-black relative overflow-hidden">
+              <div className="bg-slate-950/90 backdrop-blur-xl border-2 border-amber-400/60 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-2xl shadow-black relative overflow-hidden">
                 {/* Vạch phát sáng ánh vàng */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
 
                 {/* Header người nói */}
-                <div className="flex justify-between items-center mb-2">
-                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black text-xs sm:text-sm px-4 py-1 rounded-full uppercase tracking-wider shadow-md">
-                    <Sparkles size={14} className="fill-slate-950" />
+                <div className="flex justify-between items-center mb-1.5 sm:mb-2">
+                  <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black text-[11px] sm:text-sm px-3 sm:px-4 py-0.5 sm:py-1 rounded-full uppercase tracking-wider shadow-md">
+                    <Sparkles size={13} className="fill-slate-950" />
                     <span>Tổng Kết Báo Cáo</span>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <button
                       onClick={handleReplayVoice}
-                      className="px-2.5 py-1 rounded-lg border border-amber-500/40 bg-black/50 hover:bg-black/80 text-amber-300 text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer"
+                      className="px-2 sm:px-2.5 py-1 rounded-lg border border-amber-500/40 bg-black/50 hover:bg-black/80 text-amber-300 text-[10px] sm:text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer"
                       title="Phát lại đoạn audio này"
                     >
-                      <PlayCircle size={13} />
+                      <PlayCircle size={12} />
                       <span>Phát lại</span>
                     </button>
                   </div>
@@ -557,12 +559,12 @@ export function GameUI() {
                 </p>
 
                 {/* NÚT HOÀN TẤT & KHỞI ĐỘNG LẠI */}
-                <div className="mt-3.5 pt-3 border-t border-amber-500/30 flex justify-end">
+                <div className="mt-3 sm:mt-3.5 pt-2.5 sm:pt-3 border-t border-amber-500/30 flex justify-end">
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={restartGame}
-                    className="py-3 px-7 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider rounded-2xl shadow-xl shadow-amber-950 flex items-center gap-2 cursor-pointer transition-all"
+                    className="w-full sm:w-auto py-2.5 sm:py-3 px-5 sm:px-7 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider rounded-xl sm:rounded-2xl shadow-xl shadow-amber-950 flex items-center justify-center gap-2 cursor-pointer transition-all"
                   >
                     <RotateCcw size={16} />
                     <span>Hoàn Tất & Khởi Động Lại Trò Chơi</span>
