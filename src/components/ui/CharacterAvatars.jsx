@@ -1,5 +1,5 @@
 import React from 'react'
-import { Mic, User } from 'lucide-react'
+import { Mic } from 'lucide-react'
 
 export function CharacterAvatar({ speaker = '' }) {
   if (speaker.includes('Chú Tư')) {
